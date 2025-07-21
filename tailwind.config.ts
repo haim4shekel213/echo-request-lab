@@ -61,6 +61,32 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
+				},
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+					foreground: 'hsl(var(--warning-foreground))'
+				},
+				http: {
+					get: 'hsl(var(--get))',
+					post: 'hsl(var(--post))',
+					put: 'hsl(var(--put))',
+					delete: 'hsl(var(--delete))',
+					patch: 'hsl(var(--patch))'
+				},
+				editor: {
+					background: 'hsl(var(--editor-background))',
+					border: 'hsl(var(--editor-border))'
+				},
+				code: {
+					string: 'hsl(var(--code-string))',
+					number: 'hsl(var(--code-number))',
+					boolean: 'hsl(var(--code-boolean))',
+					null: 'hsl(var(--code-null))',
+					key: 'hsl(var(--code-key))'
 				}
 			},
 			borderRadius: {
