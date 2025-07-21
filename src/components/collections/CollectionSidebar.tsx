@@ -179,7 +179,7 @@ function CollectionItemComponent({
               level={level + 1}
               path={`${path}.${index}`}
               isActive={false}
-              onSelect={() => onSelectRequest?.(child)}
+              onSelect={() => onSelectRequest ? onSelectRequest(child) : onSelect()}
               onCreateRequest={onCreateRequest}
               onDeleteRequest={onDeleteRequest}
               onSelectRequest={onSelectRequest}

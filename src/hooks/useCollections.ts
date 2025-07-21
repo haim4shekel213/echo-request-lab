@@ -180,6 +180,29 @@ export function useCollections() {
 
   const updateActiveRequest = (request: PostmanRequest) => {
     setActiveRequest(request);
+    
+    // Save the updated request back to the collection
+    if (activeRequest) {
+      setCollections(prev => prev.map(collection => ({
+        ...collection,
+        item: updateRequestInItems(collection.item, request)
+      })));
+    }
+  };
+
+  const updateRequestInItems = (items: PostmanItem[], updatedRequest: PostmanRequest): PostmanItem[] => {
+    return items.map(item => {
+      if (item.request && 
+          item.request.method === activeRequest?.method && 
+          (typeof item.request.url === 'string' ? item.request.url : item.request.url?.raw) === 
+          (typeof activeRequest?.url === 'string' ? activeRequest.url : activeRequest?.url?.raw)) {
+        return { ...item, request: updatedRequest };
+      }
+      if (item.item) {
+        return { ...item, item: updateRequestInItems(item.item, updatedRequest) };
+      }
+      return item;
+    });
   };
 
   const executeRequest = async (request: PostmanRequest) => {

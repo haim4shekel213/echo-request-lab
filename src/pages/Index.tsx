@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { CollectionSidebar } from "@/components/collections/CollectionSidebar";
 import { RequestBuilder } from "@/components/request/RequestBuilder";
@@ -128,21 +129,25 @@ const Index = () => {
         />
         
         <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="flex-1 flex">
-            <RequestBuilder
-              request={activeRequest}
-              onRequestChange={updateActiveRequest}
-              onExecuteRequest={executeRequest}
-              isExecuting={isExecuting}
-            />
-          </div>
-          
-          <div className="h-1/2 border-t border-border">
-            <ResponseViewer
-              response={lastResponse}
-              isLoading={isExecuting}
-            />
-          </div>
+          <ResizablePanelGroup direction="vertical" className="flex-1">
+            <ResizablePanel defaultSize={60} minSize={30}>
+              <RequestBuilder
+                request={activeRequest}
+                onRequestChange={updateActiveRequest}
+                onExecuteRequest={executeRequest}
+                isExecuting={isExecuting}
+              />
+            </ResizablePanel>
+            
+            <ResizableHandle withHandle />
+            
+            <ResizablePanel defaultSize={40} minSize={20}>
+              <ResponseViewer
+                response={lastResponse}
+                isLoading={isExecuting}
+              />
+            </ResizablePanel>
+          </ResizablePanelGroup>
         </div>
       </div>
     </div>
