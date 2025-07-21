@@ -38,6 +38,7 @@ interface CollectionItemProps {
   onSelect: () => void;
   onCreateRequest: (parentPath: string) => void;
   onDeleteRequest: (requestPath: string) => void;
+  onSelectRequest?: (item: PostmanItem) => void;
 }
 
 function getMethodColor(method: HttpMethod): string {
@@ -60,7 +61,8 @@ function CollectionItemComponent({
   isActive, 
   onSelect, 
   onCreateRequest,
-  onDeleteRequest
+  onDeleteRequest,
+  onSelectRequest
 }: CollectionItemProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isRenaming, setIsRenaming] = useState(false);
@@ -176,10 +178,11 @@ function CollectionItemComponent({
               item={child}
               level={level + 1}
               path={`${path}.${index}`}
-              isActive={false} // TODO: Implement proper active state
-              onSelect={() => {}} // TODO: Implement proper selection
+              isActive={false}
+              onSelect={() => onSelectRequest?.(child)}
               onCreateRequest={onCreateRequest}
               onDeleteRequest={onDeleteRequest}
+              onSelectRequest={onSelectRequest}
             />
           ))}
         </div>
@@ -254,10 +257,11 @@ export function CollectionSidebar({
                 item={item}
                 level={0}
                 path={`${collection.info._postman_id}.${index}`}
-                isActive={false} // TODO: Implement proper active state
+                isActive={false}
                 onSelect={() => onSelectRequest(collection, item)}
                 onCreateRequest={(parentPath) => onCreateRequest(collection.info._postman_id, parentPath)}
                 onDeleteRequest={(requestPath) => onDeleteRequest(collection.info._postman_id, requestPath)}
+                onSelectRequest={(item) => onSelectRequest(collection, item)}
               />
             ))}
           </div>
