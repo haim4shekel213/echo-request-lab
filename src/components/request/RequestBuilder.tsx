@@ -14,13 +14,14 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Plus, Trash2 } from "lucide-react";
+import { Play, Plus, Trash2, Save } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RequestBuilderProps {
   request: PostmanRequest | null;
   onRequestChange: (request: PostmanRequest) => void;
   onExecuteRequest: (request: PostmanRequest) => void;
+  onSaveRequest: () => void;
   isExecuting?: boolean;
 }
 
@@ -43,6 +44,7 @@ export function RequestBuilder({
   request, 
   onRequestChange, 
   onExecuteRequest,
+  onSaveRequest,
   isExecuting = false 
 }: RequestBuilderProps) {
   const [activeTab, setActiveTab] = useState("body");
@@ -135,6 +137,15 @@ export function RequestBuilder({
             placeholder="Enter request URL"
             className="flex-1"
           />
+
+          <Button 
+            onClick={onSaveRequest}
+            variant="outline"
+            className="px-4"
+          >
+            <Save className="h-4 w-4 mr-2" />
+            Save
+          </Button>
 
           <Button 
             onClick={() => onExecuteRequest(request)}

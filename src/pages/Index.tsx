@@ -21,6 +21,7 @@ const Index = () => {
     deleteRequest,
     selectRequest,
     updateActiveRequest,
+    saveActiveRequest,
     executeRequest
   } = useCollections();
 
@@ -110,6 +111,15 @@ const Index = () => {
     }
   };
 
+  const handleSaveRequest = () => {
+    if (saveActiveRequest()) {
+      toast({
+        title: "Request saved",
+        description: "Your changes have been saved successfully."
+      });
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col bg-background text-foreground">
       <AppHeader
@@ -135,6 +145,7 @@ const Index = () => {
                 request={activeRequest}
                 onRequestChange={updateActiveRequest}
                 onExecuteRequest={executeRequest}
+                onSaveRequest={handleSaveRequest}
                 isExecuting={isExecuting}
               />
             </ResizablePanel>

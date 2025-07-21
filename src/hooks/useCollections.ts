@@ -180,14 +180,17 @@ export function useCollections() {
 
   const updateActiveRequest = (request: PostmanRequest) => {
     setActiveRequest(request);
-    
-    // Save the updated request back to the collection
+  };
+
+  const saveActiveRequest = () => {
     if (activeRequest) {
       setCollections(prev => prev.map(collection => ({
         ...collection,
-        item: updateRequestInItems(collection.item, request)
+        item: updateRequestInItems(collection.item, activeRequest)
       })));
+      return true;
     }
+    return false;
   };
 
   const updateRequestInItems = (items: PostmanItem[], updatedRequest: PostmanRequest): PostmanItem[] => {
@@ -299,6 +302,7 @@ export function useCollections() {
     deleteRequest,
     selectRequest,
     updateActiveRequest,
+    saveActiveRequest,
     executeRequest
   };
 }
